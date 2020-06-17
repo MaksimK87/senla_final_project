@@ -20,9 +20,8 @@ public class AnnouncementCategory {
             CascadeType.DETACH, CascadeType.REFRESH})
     private List<Announcement> announcementList;
 
-    public AnnouncementCategory(String category, List<Announcement> announcementList) {
+    public AnnouncementCategory(String category) {
         this.category = category;
-        this.announcementList = announcementList;
     }
 
     public AnnouncementCategory() {
@@ -54,26 +53,10 @@ public class AnnouncementCategory {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AnnouncementCategory that = (AnnouncementCategory) o;
-        return idCategory == that.idCategory &&
-                category.equals(that.category) &&
-                Objects.equals(announcementList, that.announcementList);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idCategory, category, announcementList);
-    }
-
-    @Override
     public String toString() {
         return "AnnouncementCategory{" +
                 "idCategory=" + idCategory +
                 ", category='" + category + '\'' +
-                ", announcementList=" + announcementList +
                 '}';
     }
 }

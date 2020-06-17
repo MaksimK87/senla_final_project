@@ -6,7 +6,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "user")
@@ -71,10 +70,8 @@ public class User {
     public User() {
     }
 
-    public User(String userName, String password, String email, Role role, float rating, String region, String city,
-                String phoneNumber, List<CreditCard> creditCards, List<Message> messages,
-                List<Announcement> announcements, List<Comment> comments) {
-
+    public User(String userName, String password,String email, Role role, float rating,String region, String city,
+                String phoneNumber) {
         this.userName = userName;
         this.password = password;
         this.email = email;
@@ -83,10 +80,6 @@ public class User {
         this.region = region;
         this.city = city;
         this.phoneNumber = phoneNumber;
-        this.creditCards = creditCards;
-        this.messages = messages;
-        this.announcements = announcements;
-        this.comments = comments;
     }
 
     public long getIdUser() {
@@ -201,31 +194,6 @@ public class User {
         this.comments = comments;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return idUser == user.idUser &&
-                Float.compare(user.rating, rating) == 0 &&
-                userName.equals(user.userName) &&
-                password.equals(user.password) &&
-                email.equals(user.email) &&
-                role == user.role &&
-                region == user.region &&
-                city == user.city &&
-                Objects.equals(phoneNumber, user.phoneNumber) &&
-                Objects.equals(creditCards, user.creditCards) &&
-                Objects.equals(messages, user.messages) &&
-                Objects.equals(announcements, user.announcements) &&
-                Objects.equals(comments, user.comments);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idUser, userName, password, email, role, rating, region, city,
-                phoneNumber, creditCards, messages, announcements, comments);
-    }
 
     @Override
     public String toString() {
@@ -236,13 +204,9 @@ public class User {
                 ", email='" + email + '\'' +
                 ", role=" + role +
                 ", rating=" + rating +
-                ", region=" + region +
-                ", city=" + city +
+                ", region='" + region + '\'' +
+                ", city='" + city + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", creditCards=" + creditCards +
-                ", messages=" + messages +
-                ", announcements=" + announcements +
-                ", comments=" + comments +
                 '}';
     }
 }

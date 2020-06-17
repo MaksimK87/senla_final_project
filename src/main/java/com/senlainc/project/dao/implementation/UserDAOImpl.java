@@ -45,6 +45,7 @@ public class UserDAOImpl implements UserDAO {
         query.setParameter("emailParam", email);
         query.setParameter("passwordParam", password);
         User user = (User) query.uniqueResult();
+        logger.debug(">>>> User: "+user);
         if (user == null) {
             logger.error("Incorrect login or password! ");    // Add Exception!
         }

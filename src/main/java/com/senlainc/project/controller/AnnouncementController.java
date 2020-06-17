@@ -33,7 +33,7 @@ public class AnnouncementController {
 
     private static final Logger logger = Logger.getLogger(AnnouncementController.class);
 
-    /*@ModelAttribute("categories")
+    @ModelAttribute("categories")
     public List<AnnouncementCategory> getCategories() {
         List<AnnouncementCategory> announcementCategories=null;
         try {
@@ -43,7 +43,7 @@ public class AnnouncementController {
             e.printStackTrace();
         }
         return announcementCategories;
-    }*/
+    }
 
 
     @RequestMapping("/showAllAnnouncemens")
@@ -75,14 +75,14 @@ public class AnnouncementController {
             return "loginPage";
         }
         User user= (User) session.getAttribute("user");
-        logger.debug("New announcement for user: " + user.getUserName());
+        logger.debug("New announcement for user: " + user);
         Announcement announcement = new Announcement();
-        try {
+        /*try {
             List<AnnouncementCategory> announcementCategories = announcementCategoryService.getAnnouncementCategory();
             model.addAttribute("categories", announcementCategories);
         } catch (NoSuchElementServiceException e) {
             e.printStackTrace();
-        }
+        }*/
         announcement.setUser(user);
         model.addAttribute("announcement", announcement);
         return "announcementForm";

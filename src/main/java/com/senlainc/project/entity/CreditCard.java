@@ -32,13 +32,12 @@ public class CreditCard {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public CreditCard(String cvvCode, String validThru, String name, String surname, String cardNumber, User user) {
+    public CreditCard(String cvvCode, String validThru, String name, String surname, String cardNumber) {
         this.cvvCode = cvvCode;
         this.validThru = validThru;
         this.name = name;
         this.surname = surname;
         this.cardNumber = cardNumber;
-        this.user = user;
     }
 
     public CreditCard() {
@@ -101,25 +100,6 @@ public class CreditCard {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CreditCard that = (CreditCard) o;
-        return idCard == that.idCard &&
-                cvvCode.equals(that.cvvCode) &&
-                validThru.equals(that.validThru) &&
-                name.equals(that.name) &&
-                surname.equals(that.surname) &&
-                cardNumber.equals(that.cardNumber) &&
-                Objects.equals(user, that.user);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idCard, cvvCode, validThru, name, surname, cardNumber, user);
-    }
-
-    @Override
     public String toString() {
         return "CreditCard{" +
                 "idCard=" + idCard +
@@ -128,8 +108,6 @@ public class CreditCard {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", cardNumber='" + cardNumber + '\'' +
-                ", user=" + user +
                 '}';
     }
-
 }

@@ -34,11 +34,9 @@ public class Comment {
     private User user;
 
 
-    public Comment(String commentText, Calendar publicationDate, Announcement announcement, User user) {
+    public Comment(String commentText, Calendar publicationDate) {
         this.commentText = commentText;
         this.publicationDate = publicationDate;
-        this.announcement = announcement;
-        this.user = user;
     }
 
     public Comment() {
@@ -84,22 +82,6 @@ public class Comment {
         this.user = user;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Comment comment = (Comment) o;
-        return idComment == comment.idComment &&
-                commentText.equals(comment.commentText) &&
-                publicationDate.equals(comment.publicationDate) &&
-                announcement.equals(comment.announcement) &&
-                user.equals(comment.user);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idComment, commentText, publicationDate, announcement, user);
-    }
 
     @Override
     public String toString() {
@@ -107,8 +89,6 @@ public class Comment {
                 "idComment=" + idComment +
                 ", commentText='" + commentText + '\'' +
                 ", publicationDate=" + publicationDate +
-                ", announcement=" + announcement +
-                ", user=" + user +
                 '}';
     }
 }

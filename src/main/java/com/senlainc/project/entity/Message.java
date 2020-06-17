@@ -31,11 +31,10 @@ public class Message {
     @JoinColumn(name = "user_id_from")
     private User user;
 
-    public Message(String message, Calendar publicationDate, long userIdTo, User user) {
+    public Message(String message, Calendar publicationDate, long userIdTo) {
         this.message = message;
         this.publicationDate = publicationDate;
         this.userIdTo = userIdTo;
-        this.user = user;
     }
 
     public Message() {
@@ -82,30 +81,12 @@ public class Message {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Message message1 = (Message) o;
-        return idMessage == message1.idMessage &&
-                userIdTo == message1.userIdTo &&
-                message.equals(message1.message) &&
-                Objects.equals(publicationDate, message1.publicationDate) &&
-                user.equals(message1.user);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idMessage, message, publicationDate, userIdTo, user);
-    }
-
-    @Override
     public String toString() {
         return "Message{" +
                 "idMessage=" + idMessage +
                 ", message='" + message + '\'' +
                 ", publicationDate=" + publicationDate +
                 ", userIdTo=" + userIdTo +
-                ", user=" + user +
                 '}';
     }
 }

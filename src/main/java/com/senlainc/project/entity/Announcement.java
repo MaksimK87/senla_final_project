@@ -69,9 +69,8 @@ public class Announcement {
     private List<Comment> comments;
 
 
-    public Announcement(String header, String description, boolean topStatus, Calendar creationDate,
-                        Date paymentDate, boolean activeStatus, double itemPrice, User user,
-                        AnnouncementCategory announcementCategory, List<Comment> comments) {
+    public Announcement(String header, String description, boolean topStatus,
+                        Calendar creationDate, Date paymentDate, boolean activeStatus, double itemPrice) {
         this.header = header;
         this.description = description;
         this.topStatus = topStatus;
@@ -79,9 +78,6 @@ public class Announcement {
         this.paymentDate = paymentDate;
         this.activeStatus = activeStatus;
         this.itemPrice = itemPrice;
-        this.user = user;
-        this.announcementCategory = announcementCategory;
-        this.comments = comments;
     }
 
     public Announcement() {
@@ -185,29 +181,6 @@ public class Announcement {
     }*/
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Announcement that = (Announcement) o;
-        return idAnnouncement == that.idAnnouncement &&
-                topStatus == that.topStatus &&
-                activeStatus == that.activeStatus &&
-                Double.compare(that.itemPrice, itemPrice) == 0 &&
-                header.equals(that.header) &&
-                Objects.equals(description, that.description) &&
-                creationDate.equals(that.creationDate) &&
-                Objects.equals(paymentDate, that.paymentDate) &&
-                user.equals(that.user) &&
-                announcementCategory.equals(that.announcementCategory) &&
-                Objects.equals(comments, that.comments);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idAnnouncement, header, description, topStatus, creationDate, paymentDate, activeStatus, itemPrice, user, announcementCategory, comments);
-    }
-
-    @Override
     public String toString() {
         return "Announcement{" +
                 "idAnnouncement=" + idAnnouncement +
@@ -218,9 +191,6 @@ public class Announcement {
                 ", paymentDate=" + paymentDate +
                 ", activeStatus=" + activeStatus +
                 ", itemPrice=" + itemPrice +
-                ", user=" + user +
-                ", announcementCategory=" + announcementCategory +
-                ", comments=" + comments +
                 '}';
     }
 }
