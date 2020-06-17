@@ -3,21 +3,21 @@
 <html>
 
 <head>
-        <style>
-            .error {
-                color: red
-            }
-        </style>
-        <style>
-            .message {
-                color: green
-            }
-        </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style>
+        .error {
+            color: red
+        }
+    </style>
+    <style>
+        .message {
+            color: green
+        }
+    </style>
     <title>admin page</title>
-    </head>
+</head>
 
 <body>
-
 
 
 <h2>Welcome to administrator's account, ${user.userName}! </h2>
@@ -26,7 +26,7 @@
 <h2 class="message">${successMessage}</h2>
 <h2 class="error">${errMessage}</h2>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>admin page</title>
 Available operations:
 <br/>

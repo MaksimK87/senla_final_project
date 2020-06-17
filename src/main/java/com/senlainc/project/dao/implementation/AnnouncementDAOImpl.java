@@ -1,6 +1,9 @@
-package com.senlainc.project.dao;
+package com.senlainc.project.dao.implementation;
 
+import com.senlainc.project.dao.daoexception.NoSuchElementDAOException;
+import com.senlainc.project.dao.interf.AnnouncementDAO;
 import com.senlainc.project.entity.Announcement;
+import com.senlainc.project.entity.AnnouncementCategory;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class AnnouncementDAOImpl implements AnnouncementDAO {
@@ -16,6 +20,7 @@ public class AnnouncementDAOImpl implements AnnouncementDAO {
     private static final Logger logger = Logger.getLogger(AnnouncementDAOImpl.class);
 
     private static SessionFactory sessionFactory;
+
 
     @Override
     public void addOrUpdateAnnouncement(Announcement announcement) {
@@ -44,43 +49,49 @@ public class AnnouncementDAOImpl implements AnnouncementDAO {
     }
 
     @Override
-    public List<Announcement> getAllNonTopAnnouncement() {
+    public List<Announcement> getAllNonTopAnnouncement() throws NoSuchElementDAOException {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Announcement where activeStatus=:activeStatus and topStatus=:topStatus order by creationDate desc" );
+        Query query = session.createQuery("from Announcement a where a.activeStatus=:activeStatus and a.topStatus=:topStatus order by a.creationDate desc" );//from Announcement a where a.activeStatus=:activeStatus and a.topStatus=:topStatus order by a.creationDate desc"
         query.setParameter("activeStatus",true);
         query.setParameter("topStatus",false);
         List<Announcement> announcements = query.list();
-        return announcements;
+       // logger.debug("all non top announcements: "+announcements.toString());
+        return Optional.ofNullable(announcements).orElseThrow(NoSuchElementDAOException::new);
     }
 
     @Override
-    public List<Announcement> getAllTopAnnouncement() {
+    public List<Announcement> getAllTopAnnouncement() throws NoSuchElementDAOException {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Announcement where activeStatus=:activeStatus and topStatus=:topStatus order by paymentDate desc" );
+        Query query = session.createQuery("from Announcement a where a.activeStatus=:activeStatus and a.topStatus=:topStatus order by a.paymentDate desc" );
         query.setParameter("activeStatus",true);
         query.setParameter("topStatus",true);
         List<Announcement> announcements = query.list();
-        return announcements;
+        //logger.debug("all top announcements: "+announcements.toString());
+        return Optional.ofNullable(announcements).orElseThrow(NoSuchElementDAOException::new);
     }
 
     @Override
-    public Announcement getAnnouncement(long id) {
+    public Announcement getAnnouncement(long id) throws NoSuchElementDAOException {
         Session session = sessionFactory.getCurrentSession();
         Announcement announcement=session.get(Announcement.class,id);
-        return announcement;
+        return Optional.ofNullable(announcement).orElseThrow(NoSuchElementDAOException::new);
     }
 
     @Override
-    public List<Announcement> getAnnouncementHistory(long idUser) {
+    public List<Announcement> getAnnouncementHistory(long idUser) throws NoSuchElementDAOException {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Announcement where user=:id order by creationDate desc" );
+        Query query = session.createQuery("select a from Announcement a where a.user.idUser = :id order by creationDate desc" ); //from Announcement where user=:id order by creationDate desc
         query.setParameter("id",idUser);
         List<Announcement> announcements = query.list();
-        return announcements;
+        
+        return Optional.ofNullable(announcements).orElseThrow(NoSuchElementDAOException::new);
     }
+
 
     @Autowired
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 }
+
+

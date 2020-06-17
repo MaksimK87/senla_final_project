@@ -1,7 +1,8 @@
-package com.senlainc.project.service;
+package com.senlainc.project.service.implementation;
 
-import com.senlainc.project.dao.UserDAO;
+import com.senlainc.project.dao.interf.UserDAO;
 import com.senlainc.project.entity.User;
+import com.senlainc.project.service.interf.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -3,7 +3,8 @@
 <html>
 <body>
 
-<%response.sendRedirect("/user/showMainPage");%>
+<%--<%response.sendRedirect("/user/showMainPage");%>--%>
+<%response.sendRedirect("/announcement/showAllAnnouncemens");%>
 
 </body>
 </html>

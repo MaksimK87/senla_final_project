@@ -23,7 +23,7 @@ public class Message {
     @Column(name="publication_date")
     private Calendar publicationDate;
 
-    @Column(name = "userIdTo")
+    @Column(name = "user_id_to")
     private long userIdTo;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE,

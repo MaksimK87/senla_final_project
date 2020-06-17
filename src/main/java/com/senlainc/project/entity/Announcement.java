@@ -3,7 +3,14 @@ package com.senlainc.project.entity;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,6 +25,7 @@ public class Announcement {
     private long idAnnouncement;
 
     @Column(name = "header")
+    @NotNull
     private String header;
 
     @Column(name = "description")
@@ -32,15 +40,19 @@ public class Announcement {
     private Calendar creationDate;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @CreationTimestamp
+    // @CreationTimestamp
     @Column(name = "paymentDate")
-    private Calendar paymentDate;
+    private Date paymentDate;//Calendar paymentDate;
 
     @Column(name = "isActive")
     private boolean activeStatus;
 
+
+    @Positive(message = "must be positive value!")
     @Column(name = "price")
     private double itemPrice;
+
+    /*private String dateFormat;*/
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
@@ -58,7 +70,7 @@ public class Announcement {
 
 
     public Announcement(String header, String description, boolean topStatus, Calendar creationDate,
-                        Calendar paymentDate, boolean activeStatus, double itemPrice, User user,
+                        Date paymentDate, boolean activeStatus, double itemPrice, User user,
                         AnnouncementCategory announcementCategory, List<Comment> comments) {
         this.header = header;
         this.description = description;
@@ -115,11 +127,11 @@ public class Announcement {
         this.creationDate = creationDate;
     }
 
-    public Calendar getPaymentDate() {
+    public Date getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(Calendar paymentDate) {
+    public void setPaymentDate(Date paymentDate) {
         this.paymentDate = paymentDate;
     }
 
@@ -162,6 +174,15 @@ public class Announcement {
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
+
+
+
+    /*public String getDateFormat() {
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+
+        return simpleDateFormat.format(creationDate);
+    }*/
 
     @Override
     public boolean equals(Object o) {

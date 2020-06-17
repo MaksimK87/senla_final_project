@@ -1,11 +1,10 @@
-package com.senlainc.project.service;
+package com.senlainc.project.dao.interf;
 
 import com.senlainc.project.entity.User;
 
 import java.util.List;
 
-
-public interface UserService {
+public interface UserDAO {
 
     boolean registration(User user);
 
@@ -18,5 +17,4 @@ public interface UserService {
     List<User> getAllUsers();
 
     User getUser(long id);
-
 }

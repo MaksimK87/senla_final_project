@@ -1,5 +1,6 @@
-package com.senlainc.project.dao;
+package com.senlainc.project.dao.implementation;
 
+import com.senlainc.project.dao.interf.UserDAO;
 import com.senlainc.project.entity.User;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;

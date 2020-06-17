@@ -2,7 +2,7 @@ package com.senlainc.project.controller;
 
 import com.senlainc.project.entity.Role;
 import com.senlainc.project.entity.User;
-import com.senlainc.project.service.UserService;
+import com.senlainc.project.service.interf.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -59,7 +59,7 @@ public class UserController {
     }
 
     @RequestMapping("/processLoginForm")
-    public String processLoginForm(@ModelAttribute("user") User user, HttpServletRequest request, Model model) {
+    public String processLoginForm(@ModelAttribute("user") User user, HttpServletRequest request, Model model,HttpSession session) {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         if (password == null || password.isEmpty() || email == null || email.isEmpty()) {
@@ -68,10 +68,15 @@ public class UserController {
         }
         user = userService.signIn(email, password);
         model.addAttribute("user", user);
-        if (user.getRole().toString().equals("ADMIN")) {
+        session=request.getSession(true);
+        logger.debug("--->>> add to session after logination user: "+"ID: "+user.getIdUser()+" Name: "+user.getUserName());
+        session.setAttribute("user",user);
+        if (user.getRole().equals(Role.ADMIN)) {
             logger.debug("Admin data: " + user.getRole() + ", " + user.getEmail() + ", " + user.getUserName());
             return "adminPage";
         } else {
+            session=request.getSession(true);
+            session.setAttribute("user",user);
             return "userPage";
         }
     }
