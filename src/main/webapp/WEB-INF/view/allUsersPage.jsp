@@ -21,7 +21,7 @@
     <c:forEach var="user" items="${users}">
 
 
-        <c:url var="deleteUser" value="/user/deleteUser">
+        <c:url var="deleteUser" value="/admin/deleteUser">
             <c:param name="userId" value="${user.idUser}" />
         </c:url>
 
@@ -47,7 +47,7 @@
     </c:forEach>
 
 </table>
-<a href="/user/showMainPage"> Go to admin main page</a>
+<a href="/user/showMainPage"> Go to admin main page</a>   <%--home page!!!!--%>
 <br/>
 </body>
 </html>

@@ -1,4 +1,5 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -18,9 +19,16 @@
 <h2 class="message">${successMessage}</h2>
 <h2 class="error">${errMessage}</h2>
 
-<form:form action="/user/processLoginForm" method="get">
+<form:form action="authenticateUser" method="post">
 
-    Email: <input placeholder="email" name="email" type="text"/>
+    <c:if test="${param.error != null}">
+
+        <i class="error">Sorry! You entered invalid username/password.</i> <br/>
+
+
+    </c:if>
+<br/>
+    Email: <input placeholder="email" name="username" type="text"/>
     <br/>
     Password: <input placeholder="password" name="password" type="password"/>
 
@@ -30,7 +38,7 @@
 </form:form>
 <br/>
 
-<form:form action="/user/showRegistrationForm">
+<form:form action="/registration">
     <input type="submit" value="registration"/>
 </form:form>
 

@@ -8,13 +8,18 @@
 <body>
 <h2>Private announcement platform</h2>
 
-<form:form action="/user/showLoginForm">
-    <input type="submit" value="log in">
-</form:form><br/>
+<c:if test="${isAuth=false}">
 
-<form:form action="/user/showRegistrationForm">
-    <input type="submit" value="registration">
-</form:form>
+    <form:form action="/login">
+        <input type="submit" value="log in">
+    </form:form><br/>
+
+    <form:form action="/registration">
+        <input type="submit" value="registration">
+    </form:form>
+
+</c:if>
+
 
 <jsp:include page="announcementList.jsp"/>
 

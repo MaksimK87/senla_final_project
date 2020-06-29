@@ -26,7 +26,7 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<form:form action="/user/saveProfileChanges" modelAttribute="user">
+<form:form action="/user/saveProfile" modelAttribute="user">
 
     <br/>
 

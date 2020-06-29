@@ -4,6 +4,7 @@ import com.senlainc.project.dao.interf.UserDAO;
 import com.senlainc.project.entity.User;
 import com.senlainc.project.service.interf.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,9 +16,13 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDAO userDAO;
 
+    @Autowired
+    private PasswordEncoder bCryptPasswordEncoder;
+
     @Override
     @Transactional
     public boolean registration(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userDAO.registration(user);
     }
 
@@ -36,6 +41,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void updateUser(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userDAO.updateUser(user);
     }
 

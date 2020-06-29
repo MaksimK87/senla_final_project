@@ -23,10 +23,10 @@
             <td><form:textarea path = "description" rows = "5" cols = "30"/></td>
         </tr>
         <tr>
-            <td><form:label path = "announcementCategory">Choose category:</form:label></td>
+            <td><form:label path = "announcementCategory.idCategory">Choose category:</form:label></td>
             <td>
-                <form:select path = "announcementCategory">
-                    <form:option value = "NONE" label = "Select"/>
+                <form:select path = "announcementCategory.idCategory">
+                   <%-- <form:option value = "NONE" label = "Select"/>--%>
                     <form:options items = "${categories}" />
                 </form:select>
             </td>

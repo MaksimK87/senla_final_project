@@ -13,7 +13,7 @@
 
 <h2> Welcome to admin registration page! </h2><br/>
 
-<form:form action="/user/processAdminRegistration" modelAttribute="admin">
+<form:form action="/admin/adminRegistration" modelAttribute="admin" method="post">
 
     <br/>
     Enter email: <form:input placeholder="email" path="email"/>

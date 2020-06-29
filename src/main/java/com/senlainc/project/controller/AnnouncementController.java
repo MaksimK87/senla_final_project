@@ -1,7 +1,6 @@
 package com.senlainc.project.controller;
 
 import com.senlainc.project.entity.Announcement;
-import com.senlainc.project.entity.AnnouncementCategory;
 import com.senlainc.project.entity.User;
 import com.senlainc.project.service.interf.AnnouncementCategoryService;
 import com.senlainc.project.service.interf.AnnouncementService;
@@ -17,12 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Map;
 
 @Controller
-@RequestMapping("announcement")
+@RequestMapping("/announcement")
 public class AnnouncementController {
 
     @Autowired
@@ -34,16 +32,19 @@ public class AnnouncementController {
     private static final Logger logger = Logger.getLogger(AnnouncementController.class);
 
     @ModelAttribute("categories")
-    public List<AnnouncementCategory> getCategories() {
-        List<AnnouncementCategory> announcementCategories=null;
+    public Map<Integer,String> getCategories() {
+        Map<Integer, String> announcementCategories = null;
         try {
             announcementCategories = announcementCategoryService.getAnnouncementCategory();
+
         } catch (NoSuchElementServiceException e) {
             logger.error("--->>> Exception while getting categories! ");
             e.printStackTrace();
         }
         return announcementCategories;
     }
+
+
 
 
     @RequestMapping("/showAllAnnouncemens")
@@ -70,11 +71,11 @@ public class AnnouncementController {
 
     @RequestMapping("/showNewAnnouncementForm")
     public String showNewAnnouncementForm(HttpSession session, Model model, HttpServletRequest request) {
-        session=request.getSession(false);
-        if(session==null){
+        session = request.getSession(false);
+        if (session == null) {
             return "loginPage";
         }
-        User user= (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("user");
         logger.debug("New announcement for user: " + user);
         Announcement announcement = new Announcement();
         /*try {
@@ -94,6 +95,7 @@ public class AnnouncementController {
         if (bindingResult.hasErrors()) {
             return "announcementForm";
         }
+        logger.debug("New announcement: "+announcement);
         announcementService.addOrUpdateAnnouncement(announcement);
         model.addAttribute("successMessage", "New announcement has been added!");
         return "userPage";

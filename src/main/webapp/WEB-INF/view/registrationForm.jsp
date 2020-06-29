@@ -13,7 +13,7 @@
 
 <h2> Welcome to registration page! </h2>
 
-<form:form action="/user/processRegistration" modelAttribute="user">
+<form:form action="/registration" modelAttribute="user">
 
     <br/>
     Enter email: <form:input placeholder="email" path="email"/>

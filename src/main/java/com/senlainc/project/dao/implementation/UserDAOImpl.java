@@ -8,6 +8,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,6 +21,10 @@ public class UserDAOImpl implements UserDAO {
 
     private static SessionFactory sessionFactory;
 
+    @Autowired
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public boolean registration(User user) {
@@ -84,10 +90,19 @@ public class UserDAOImpl implements UserDAO {
         User user = (User) query.uniqueResult();            // Exception if null !!!
         return user;
     }
-
-    @Autowired
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+    @Transactional
+    @Override
+    public User findByEmail(String userEmail) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from User where email=:emailParam");
+        query.setParameter("emailParam", userEmail);
+        User user = (User) query.uniqueResult();
+        if(user!=null){
+            logger.debug("Find user by email: "+user);
+        }
+        return user;
     }
+
+
 
 }

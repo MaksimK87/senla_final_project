@@ -32,7 +32,7 @@ Available operations:
 <br/>
 Add new administrator:
 <br/>
-<form:form action="/user/showAdminRegistrationForm">
+<form:form action="/admin/adminRegistration" method="get">
     <input type="submit" value="add new administrator"/>
 </form:form>
 <br/>
@@ -43,16 +43,8 @@ Edit current profile:
 </form:form>
 <br/>
 Show all users:
-<form:form action="/user/showAllUsers">
+<form:form action="/admin/showAllUsers">
     <input type="submit" value="show all users"/>
-</form:form>
-<br/>
-
-
-Delete admin profile:
-<br/>
-<form:form action="/user/deleteAdmin">
-    <input type="submit" value="delete admin profile"/>
 </form:form>
 <br/>
 
